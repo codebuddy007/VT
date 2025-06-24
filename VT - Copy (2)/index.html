@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vikram Textiles - The Art of Digital Print</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --secondary: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+            color: var(--dark);
+            overflow-x: hidden;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-circle {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+        }
+        
+        nav {
+            display: flex;
+        }
+        
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: 600;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover:after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            position: relative;
+        }
+        
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: var(--primary);
+            border-radius: 3px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+        
+        .hamburger span:nth-child(1) {
+            top: 0px;
+        }
+        
+        .hamburger span:nth-child(2) {
+            top: 10px;
+        }
+        
+        .hamburger span:nth-child(3) {
+            top: 20px;
+        }
+        
+        .hamburger.open span:nth-child(1) {
+            top: 10px;
+            transform: rotate(135deg);
+        }
+        
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+            transform: rotate(180deg);
+        }
+        
+        .hamburger.open span:nth-child(3) {
+            top: 10px;
+            transform: rotate(225deg);
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: -100%;
+            left: 0;
+            right: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            z-index: 99;
+            transition: top 0.3s ease;
+        }
+        
+        .mobile-menu.open {
+            top: 80px;
+        }
+        
+        .mobile-menu a {
+            display: block;
+            padding: 1.5rem;
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        section {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .home {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url(VTWall2.jpg);
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .home-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 6rem;
+            margin: 0;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .home-content p {
+            font-size: 2.5rem;
+            opacity: 0.9;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+
+        .services {
+            background-color: var(--light);
+            padding: 5rem 0;
+        }
+        
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .services-heading {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .services-heading h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .services-heading p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+          /* Desktop Horizontal Carousel */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+        }
+        
+        .services-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            gap: 2rem;
+            padding: 1rem 0;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .services-carousel::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .service-card {
+            flex: 0 0 300px;
+            scroll-snap-align: start;
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+         /* Mobile Vertical Stack */
+        @media (max-width: 768px) {
+            .services-carousel {
+                flex-direction: column;
+                overflow-x: visible;
+                gap: 1.5rem;
+            }
+            
+            .service-card {
+                flex: 1 1 auto;
+                width: 80%;
+                margin: 0 auto;
+            }
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+         .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        .about {
+            background-color: white;
+        }
+        
+        .about-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem;
+            text-align: center;
+        }
+        
+        .partners h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .partner-count {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .ceo-message {
+            background: var(--light);
+            padding: 3rem;
+            width: 100%;
+            max-width: 800px;
+            position: relative;
+            margin-top: 3rem;
+        }
+        
+        .ceo-message:before {
+            content: '”';
+            position: absolute;
+            top: 1rem;
+            left: 2rem;
+            font-size: 8rem;
+            color: var(--primary);
+            opacity: 0.1;
+            line-height: 1;
+        }
+        
+        .ceo-message h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .ceo-message p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-style: italic;
+        }
+     
+        /* Gallery Section */
+        .gallery {
+            background-color: var(--light);
+            padding: 5rem 0;
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .gallery-heading {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-heading h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .gallery-heading p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Gallery Carousel */
+        .gallery-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            gap: 2rem;
+            padding: 1rem 0;
+            -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
+        }
+
+        .gallery-carousel::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for a cleaner look */
+        }
+
+        .gallery-card {
+            flex: 0 0 300px; /* Fixed width, prevents shrinking */
+            scroll-snap-align: start; /* Snap to the start of each card */
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 200px; /* Fixed height for images */
+            object-fit: cover; /* Cover the area without distortion */
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .gallery-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+
+        .gallery-card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+      
+        .contacts {
+            background-color: var(--light);
+        }
+        
+        .contacts-content {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+        }
+        
+        .map-container {
+            width: 70%;
+            height: 200%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #map {
+            width: 100%;
+            height: 80%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .contact-info {
+            width: 30%;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .contact-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 4rem;
+            width: 100%;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-content p {
+            margin: 0;
+        }
+        
+        .contact-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-links a:hover {
+            color: var(--secondary);
+        }
+       
+        
+        @media (max-width: 1024px) {
+            .services-container, .contacts-content {
+                flex-direction: column;
+            }
+            
+            .home-content h1 {
+                font-size: 3rem;
+            }
+            
+            .services-image img {
+                width: 100%;
+                max-height: 50vh;
+            }
+            
+            .map-container {
+                width: 100%;
+                height: 50vh;
+                margin-top: 2rem;
+            }
+            
+            .contact-info {
+                width: 100%;
+                padding: 2rem;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .home-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .home-content p {
+                font-size: 1.2rem;
+            }
+            
+            .services-text, .about-content {
+                padding: 2rem;
+            }
+            
+            footer {
+                padding: 2rem;
+                text-align: center;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .contact-links {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .contact-links a {
+                margin: 0;
+            }
+
+            /* Mobile Vertical Stack for Gallery */
+            .gallery-carousel {
+                flex-direction: column; /* Stack cards vertically */
+                overflow-x: visible; /* No horizontal scroll on mobile */
+                gap: 1.5rem;
+            }
+            
+            .gallery-card {
+                flex: 1 1 auto; /* Allow cards to grow/shrink */
+                width: 80%; /* Adjust width for mobile */
+                margin: 0 auto; /* Center cards */
+            }
+
+            .gallery-card img {
+                height: 250px; /* Adjust image height for mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <div class="logo-circle">VT</div>
+        <span>Vikram Textile</span>
+    </div>
+    <nav class="desktop-nav">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a> <!-- Added Gallery link -->
+        <a href="#about">About</a>
+        <a href="#contacts">Contacts</a>
+    </nav>
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#home" onclick="toggleMenu()">Home</a>
+    <a href="#services" onclick="toggleMenu()">Services</a>
+    <a href="#gallery" onclick="toggleMenu()">Gallery</a> <!-- Added Gallery link -->
+    <a href="#about" onclick="toggleMenu()">About</a>
+    <a href="#contacts" onclick="toggleMenu()">Contacts</a>
+</div>
+
+<section id="home" class="home">
+    <div class="home-content">
+        <h1>Vikram Textile</h1>
+        <p>The Art of Digital Print</p>
+    </div>
+</section>
+
+<section id="services" class="services">
+   
+    <div class="services-container">
+        <div class="services-heading">
+            <h2>Our Services</h2>
+            <p>Premium digital printing solutions for all your fabric needs</p>
+        </div>
+                      <div class="services-carousel-wrapper">
+            <div class="services-carousel">
+                <!-- First Set of Cards -->
+                <div class="service-card">
+                    <div class="service-icon">🏭</div>
+                    <h3>Wholesale Printing</h3>
+                    <p>High-volume digital printing for bulk orders with consistent quality and competitive pricing.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3>Custom Designs</h3>
+                    <p>Bespoke digital printing that brings your unique designs to life on any fabric.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🌍</div>
+                    <h3>Global Export</h3>
+                    <p>Worldwide shipping with reliable logistics partners and customs clearance handled.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">♻️</div>
+                    <h3>Eco-Friendly</h3>
+                    <p>Sustainable printing with water-based inks that meet global environmental standards.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Fast Turnaround</h3>
+                    <p>Quick production times without compromising on the quality of your prints.</p>
+                </div>
+                </div>
+</section>
+
+<section id="gallery" class="gallery">
+    <div class="gallery-container">
+        <div class="gallery-heading">
+            <h2>Our Work in Pictures</h2>
+            <p>A glimpse into the quality and craftsmanship of Vikram Textiles.</p>
+        </div>
+        <div class="gallery-carousel-wrapper">
+            <div class="gallery-carousel">
+                <div class="gallery-card">
+                    <img src="VTMachines.jpg" alt="Digital Printing Machines">
+                    <h3>State-of-the-Art Machinery</h3>
+                    <p>Advanced digital printing machines ensuring precision and vibrant colors.</p>
+                </div>
+                <div class="gallery-card">
+                    <img src="VTMain.jpg" alt="Main Office Building">
+                    <h3>Our Headquarters</h3>
+                    <p>The central hub where innovation and quality converge.</p>
+                </div>
+                <div class="gallery-card">
+                    <img src="VTOffice.jpg" alt="Modern Office Interior">
+                    <h3>Modern Office Space</h3>
+                    <p>A collaborative environment fostering creativity and efficiency.</p>
+                </div>
+                <div class="gallery-card">
+                    <img src="VTStock.jpg" alt="Fabric Stock">
+                    <h3>Extensive Fabric Stock</h3>
+                    <p>A wide variety of fabrics ready for your custom designs.</p>
+                </div>
+                <div class="gallery-card">
+                    <img src="VTPrint2.jpg" alt="Printed Fabric Detail">
+                    <h3>Intricate Print Detail</h3>
+                    <p>Showcasing the fine details and rich colors of our digital prints.</p>
+                </div>
+                <div class="gallery-card">
+                    <img src="VTPrintCollection.jpg" alt="Various Printed Fabrics">
+                    <h3>Diverse Print Collection</h3>
+                    <p>A collection of our diverse and high-quality printed fabrics.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="about">
+    <div class="about-content">
+        <div class="partners">
+            <h3>Our Trusted Network</h3>
+            <div class="partner-count">100+</div>
+            <p>We proudly collaborate with trusted partners across five continents</p>
+        </div>
+        
+        <div class="ceo-message">
+            <h4>Words from Our CEO</h4>
+            <p>"For over a decade, Vikram Textiles has been at the forefront of digital fabric printing innovation. What began as a small operation has grown into a global enterprise without losing our commitment to quality and craftsmanship. We've built our reputation one satisfied customer at a time, and today our prints adorn fabrics in fashion houses, hotels, and homes worldwide. Our secret? Never compromising on quality, always innovating, and treating every client like family."</p>
+            <p>— Vikram Rohilla, Founder & CEO</p>
+        </div>
+    </div>
+</section>
+
+
+
+<section id="contacts" class="contacts">
+    <div class="contacts-content">
+        <div class="map-container">
+           <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3720.067821528292!2d72.84952927526103!3d21.189464580500342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjHCsDExJzIyLjEiTiA3MsKwNTEnMDcuNiJF!5e0!3m2!1sen!2sin!4v1750683451687!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="contact-info">
+            <h2>Contact Us</h2>
+            <p><strong>Vikram Textile Headquarters:</strong><br>
+            165 To 168 Yamuna Nagar-2<br>
+            Anjana Farm, Surat<br>
+            Gujrat, India</p>
+            
+            <p><strong>Email:</strong> vrohilla249@gmail.com<br>
+            <strong>Phone:</strong> +91 90332 47414</p>
+        </div>
+    </div>
+</section>
+
+
+<footer>
+    <div class="footer-content">
+        <p>&copy; 2025 Vikram Textile. All rights reserved.</p>
+        <div class="contact-links">
+            <a href="mailto:contact@vikramtextiles.com">vrohilla249@gmail.com</a>
+            <a href="tel:+919033247414">+91 90332 47414</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function toggleMenu() {
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        hamburger.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+    }
+</script>
+
+</body>
+</html>

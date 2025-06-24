@@ -267,16 +267,19 @@
          /* Mobile Vertical Stack */
         @media (max-width: 768px) {
             .services-carousel {
-                flex-direction: column;
-                overflow-x: visible;
-                gap: 1.5rem;
-            }
+        flex-direction: column;
+        overflow-x: visible;
+        gap: 1.5rem;
+        /* Remove horizontal padding from carousel itself if it's causing issues */
+        padding: 0; /* Changed from 1rem 0 */
+    }
             
-            .service-card {
-                flex: 1 1 auto;
-                width: 80%;
-                margin: 0 auto;
-            }
+          .service-card {
+        flex: 1 1 auto;
+        width: 100%; /* Changed from 80% */
+        margin: 0; /* Changed from 0 auto */
+        /* Add padding to the container instead of card margin */
+    }
         }
         
         .service-icon {
@@ -586,21 +589,24 @@
             }
 
             /* Mobile Vertical Stack for Gallery */
-            .gallery-carousel {
-                flex-direction: column; /* Stack cards vertically */
-                overflow-x: visible; /* No horizontal scroll on mobile */
-                gap: 1.5rem;
-            }
-            
-            .gallery-card {
-                flex: 1 1 auto; /* Allow cards to grow/shrink */
-                width: 80%; /* Adjust width for mobile */
-                margin: 0 auto; /* Center cards */
-            }
-
-            .gallery-card img {
-                height: 250px; /* Adjust image height for mobile */
-            }
+          .gallery-carousel {
+        flex-direction: column; /* Stack cards vertically */
+        overflow-x: visible; /* No horizontal scroll on mobile */
+        gap: 1.5rem;
+        padding: 0; /* Changed from 1rem 0 */
+    }
+             .gallery-card {
+        flex: 1 1 auto; /* Allow cards to grow/shrink */
+        width: 100%; /* Changed from 80% */
+        margin: 0; /* Changed from 0 auto */
+    }
+           .gallery-card img {
+        height: 250px; /* Adjust image height for mobile */
+    }
+  .services-container,
+    .gallery-container {
+        padding: 0 1rem; /* Add consistent horizontal padding for mobile */
+    }
         }
     </style>
 </head>
